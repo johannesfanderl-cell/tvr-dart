@@ -104,6 +104,11 @@ section{padding:92px 0}
 .format b{display:block;font-family:var(--head);font-size:54px;line-height:1}
 .format span{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 
+.tbl{align-self:flex-start;margin-top:22px;position:relative;z-index:1;padding:13px 20px;min-height:48px;font-size:14px}
+.photo{margin:44px 0 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);position:relative;background:var(--panel)}
+.photo img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:50% 45%}
+.photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:48px 24px 18px;background:linear-gradient(180deg,transparent,rgba(4,12,26,.9));font-family:var(--head);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(18px,3vw,26px)}
+@media(max-width:620px){.photo img{aspect-ratio:4/3}.photo figcaption{position:static;padding:14px 18px;background:none;font-size:17px}}
 /* Termine */
 .event{display:flex;align-items:stretch;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:44px}
 .event .date{background:var(--accent);color:var(--white);padding:22px 26px;text-align:center;display:flex;flex-direction:column;justify-content:center;min-width:128px}
@@ -229,18 +234,24 @@ footer a:hover{color:var(--white)}
     <p class="eyebrow">Mannschaften</p>
     <h2>Zwei Teams,<br>ein Verein</h2>
     <p class="lead">Wir spielen mit zwei Mannschaften im Ligabetrieb des Bezirks Niederbayern. Heimspiele finden im Gasthaus zur Schmiede statt – Zuschauer sind jederzeit willkommen.</p>
-    <div class="grid g2">
+    <figure class="photo reveal">
+      <img src="assets/team.jpg" width="1320" height="984" loading="lazy" alt="Die Dartspieler des TV Riedenburg jubeln gemeinsam im Gasthaus zur Schmiede">
+      <figcaption>Good Darts! Die Dartabteilung des TV Riedenburg</figcaption>
+    </figure>
+    <div class="grid g2" style="margin-top:22px">
       <div class="card team reveal">
         <span class="no" aria-hidden="true">1</span>
         <span class="tag">Bezirk Niederbayern</span>
         <h3>1. Mannschaft</h3>
         <span class="league"><i></i>4. Bezirksliga 3</span>
+        <a class="btn primary tbl" href="https://bdv-dart.liga.nu/cgi-bin/WebObjects/nuLigaDARTDE.woa/wa/groupPage?championship=NBay+2026%2F27&amp;group=211562" target="_blank" rel="noopener">Tabelle &amp; Spielplan →</a>
       </div>
       <div class="card team reveal">
         <span class="no" aria-hidden="true">2</span>
         <span class="tag">Bezirk Niederbayern</span>
         <h3>2. Mannschaft</h3>
         <span class="league"><i></i>5. Bezirksliga 1</span>
+        <a class="btn primary tbl" href="https://bdv-dart.liga.nu/cgi-bin/WebObjects/nuLigaDARTDE.woa/wa/groupPage?championship=NBay+2026%2F27&amp;group=211568" target="_blank" rel="noopener">Tabelle &amp; Spielplan →</a>
       </div>
     </div>
     <p class="eyebrow" style="margin-top:56px">So läuft ein Spieltag</p>
