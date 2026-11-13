@@ -142,6 +142,11 @@ h1,h2,h3{overflow-wrap:break-word;hyphens:manual}
 .list svg{flex:none;margin-top:3px;stroke:var(--accent2)}
 .list strong{color:var(--white);display:block}
 
+.sponsors{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:44px}
+.sp{background:#fff;border-radius:12px;height:150px;padding:18px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+a.sp:hover{transform:translateY(-4px)}
+.sp img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+@media(max-width:620px){.sponsors{grid-template-columns:repeat(2,1fr)}.sp{height:120px;padding:14px}}
 /* Footer */
 footer{background:#040c1a;border-top:1px solid var(--line);padding:56px 0 28px;color:var(--muted);font-size:15px}
 .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
@@ -320,6 +325,19 @@ footer a:hover{color:var(--white)}
     </div>
   </div>
 </section>
+<section id="sponsoren">
+  <div class="wrap">
+    <p class="eyebrow">Partner &amp; Sponsoren</p>
+    <h2>Danke für die<br>Unterstützung</h2>
+    <div class="sponsors">
+      <a class="sp reveal" href="https://www.wittko.eu" target="_blank" rel="noopener" style="background:#00507a"><img src="assets/sponsor-wittko.jpg" alt="WITTKO.eu" loading="lazy"></a>
+      <a class="sp reveal" href="https://www.schreinerei-ferstl.de" target="_blank" rel="noopener"><img src="assets/sponsor-ferstl.jpg" alt="Florian Ferstl – Bau- &amp; Möbelschreinerei, Innenausbau" loading="lazy"></a>
+      <div class="sp reveal"><img src="assets/sponsor-pollinger.jpg" alt="Spenglerei Pollinger" loading="lazy"></div>
+      <div class="sp reveal"><img src="assets/sponsor-schiefer.jpg" alt="Baubüro Schiefer Holzbau GmbH" loading="lazy"></div>
+      <div class="sp reveal"><img src="assets/sponsor-schmid.jpg" alt="Zimmerei Stefan Schmid" loading="lazy"></div>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -336,6 +354,7 @@ footer a:hover{color:var(--white)}
           <li><a href="#mannschaften">Mannschaften</a></li>
           <li><a href="#termine">Termine</a></li>
           <li><a href="#spielort">Spielort</a></li>
+          <li><a href="#sponsoren">Sponsoren</a></li>
         </ul>
       </div>
       <div>
