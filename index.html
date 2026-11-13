@@ -3,177 +3,355 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TV Riedenburg – Abteilung Dart</title>
-<meta name="description" content="Dartabteilung des TV Riedenburg 1906 e.V. – Training, Spielort, Mannschaften und Termine.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<title>TV Riedenburg Dart – Abteilung Dart des TV Riedenburg 1906 e.V.</title>
+<meta name="description" content="Dartabteilung des TV Riedenburg 1906 e.V.: zwei Ligamannschaften im Bezirk Niederbayern, öffentliches Training jeden Donnerstag um 19 Uhr im Gasthaus zur Schmiede in Untereggersberg.">
+<meta name="theme-color" content="#061226">
 <style>
-html{scroll-behavior:smooth}
-body{margin:0;background:#ffffff}
-a{color:#0b3d91}a:hover{color:#072a66}
-@media (max-width:600px){h1{font-size:52px !important}h2{font-size:36px !important}}
+:root{
+  --bg:#061226; --bg2:#0a1b36; --panel:#0e2244; --line:#1c3566;
+  --text:#eef3fc; --muted:#a9b9d6; --accent:#2f7bff; --accent2:#7db0ff; --white:#ffffff;
+  --head:"Arial Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2)}
+img,svg{max-width:100%}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:var(--head);font-weight:800;text-transform:uppercase;letter-spacing:.02em;line-height:1;margin:0}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);margin:0 0 14px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--accent);border-radius:2px}
+h2{font-size:clamp(38px,6vw,60px)}
+.lead{color:var(--muted);max-width:680px;margin:18px 0 0}
+section{padding:92px 0}
+.alt{background:var(--bg2)}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:50;background:rgba(6,18,38,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--white);text-decoration:none;font-family:var(--head);font-weight:800;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+.brand span b{color:var(--accent2);font-weight:800}
+.menu{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0}
+.menu a{color:var(--text);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 0;display:block}
+.menu a:hover{color:var(--accent2)}
+.menu .cta{background:var(--accent);color:var(--white);padding:11px 18px;border-radius:6px}
+.menu .cta:hover{background:#1f66e0;color:var(--white)}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:46px;height:46px;cursor:pointer;align-items:center;justify-content:center}
+.burger svg{stroke:var(--white)}
+@media(max-width:860px){
+  .burger{display:flex}
+  .menu{display:none;position:absolute;left:0;right:0;top:68px;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px 22px 20px}
+  .menu.open{display:flex}
+  .menu a{padding:15px 0;border-bottom:1px solid var(--line)}
+  .menu .cta{margin-top:16px;text-align:center;border-bottom:0}
+}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:84px 0 0;background:
+  radial-gradient(900px 520px at 85% 30%,rgba(47,123,255,.28),transparent 65%),
+  linear-gradient(180deg,#081a38 0%,var(--bg) 100%)}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-size:clamp(56px,11vw,128px);letter-spacing:.01em}
+.hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--accent2)}
+.hero p.sub{font-size:clamp(18px,2.4vw,22px);color:var(--muted);max-width:560px;margin:24px 0 0}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:16px 26px;border-radius:6px;min-height:52px}
+.btn.primary{background:var(--accent);color:var(--white)}
+.btn.primary:hover{background:#1f66e0}
+.btn.ghost{border:2px solid var(--white);color:var(--white);padding:14px 24px}
+.btn.ghost:hover{background:var(--white);color:var(--bg)}
+.board{position:absolute;z-index:1;right:-170px;top:-40px;width:640px;aspect-ratio:1;border-radius:50%;opacity:.5;
+  background:radial-gradient(circle closest-side,var(--accent) 0 3.5%,#dfe9fb 3.5% 8%,transparent 8%),
+  repeating-conic-gradient(from -9deg,#0c2146 0 18deg,#16356b 18deg 36deg);
+  box-shadow:0 0 0 14px #050f20,0 0 120px rgba(47,123,255,.35)}
+.board::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:repeating-conic-gradient(from -9deg,var(--accent) 0 18deg,#dfe9fb 18deg 36deg);
+  -webkit-mask:radial-gradient(circle closest-side,transparent 0 54%,#000 54% 60%,transparent 60% 92%,#000 92% 100%);
+  mask:radial-gradient(circle closest-side,transparent 0 54%,#000 54% 60%,transparent 60% 92%,#000 92% 100%)}
+@media(max-width:860px){.board{width:420px;right:-190px;top:10px;opacity:.32}}
+.stats{position:relative;z-index:2;margin-top:76px;border-top:1px solid var(--line);background:rgba(6,18,38,.55)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:28px 12px 30px;text-align:center;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-family:var(--head);font-size:clamp(38px,6vw,56px);line-height:1;color:var(--white)}
+.stat span{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:620px){.stats .wrap{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* Cards */
+.grid{display:grid;gap:22px;margin-top:44px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:30px;position:relative;overflow:hidden}
+.card h3{font-size:30px;margin-top:6px}
+.card p{color:var(--muted);margin:10px 0 0}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2)}
+.card.hot{background:linear-gradient(140deg,#1f66e0,#123f96);border-color:#3b82f6}
+.card.hot .tag,.card.hot p{color:#dbe8ff}
+.time{font-family:var(--head);font-weight:800;font-size:64px;line-height:1;color:var(--white);margin-top:14px}
+.time small{font-size:24px;color:var(--accent2);margin-left:6px}
+.card.hot .time small{color:#dbe8ff}
+
+/* Teams */
+.team{display:flex;flex-direction:column;gap:6px;padding:34px}
+.team .no{position:absolute;right:-6px;top:-34px;font-family:var(--head);font-weight:800;font-size:210px;line-height:1;color:rgba(125,176,255,.11)}
+.team h3{font-size:36px}
+.league{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;margin-top:14px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:700;font-size:15px;color:var(--white)}
+.league i{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+.format{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.format div{padding:26px 12px;text-align:center;border-left:1px solid var(--line)}
+.format div:first-child{border-left:0}
+.format b{display:block;font-family:var(--head);font-size:54px;line-height:1}
+.format span{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* Termine */
+.event{display:flex;align-items:stretch;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:44px}
+.event .date{background:var(--accent);color:var(--white);padding:22px 26px;text-align:center;display:flex;flex-direction:column;justify-content:center;min-width:128px}
+.event .date b{font-family:var(--head);font-size:58px;line-height:.95}
+.event .date span{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.event .info{padding:24px 28px;display:flex;flex-direction:column;justify-content:center}
+.event h3{font-size:clamp(26px,6vw,32px);margin-top:6px}
+h1,h2,h3{overflow-wrap:break-word;hyphens:manual}
+.event .info{min-width:0}
+.event p{margin:8px 0 0;color:var(--muted)}
+.weekly{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:22px}
+.row{display:flex;align-items:center;gap:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 24px}
+.row b{font-family:var(--head);font-size:30px;text-transform:uppercase;color:var(--accent2);min-width:52px}
+.row span{color:var(--muted)}
+.row strong{display:block;color:var(--white)}
+
+/* CTA */
+.cta-band{background:linear-gradient(120deg,#1f66e0 0%,#0f3a8c 100%);padding:76px 0;position:relative;overflow:hidden}
+.cta-band::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:44px solid rgba(255,255,255,.08)}
+.cta-band .wrap{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px}
+.cta-band h2{font-size:clamp(36px,6vw,58px)}
+.cta-band p{margin:12px 0 0;color:#dbe8ff;max-width:560px}
+.btn.white{background:var(--white);color:#0f3a8c}
+.btn.white:hover{background:#dbe8ff}
+
+/* Spielort */
+.venue{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-top:44px}
+.venue .card h3{font-size:34px}
+.list{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.list li{display:flex;gap:14px;align-items:flex-start;color:var(--muted)}
+.list svg{flex:none;margin-top:3px;stroke:var(--accent2)}
+.list strong{color:var(--white);display:block}
+
+/* Footer */
+footer{background:#040c1a;border-top:1px solid var(--line);padding:56px 0 28px;color:var(--muted);font-size:15px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px}
+footer h4{margin:0 0 14px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--white)}
+footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+footer a{color:var(--muted);text-decoration:none;display:inline-block;padding:6px 0}
+footer a:hover{color:var(--white)}
+.copy{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media(max-width:620px){section{padding:68px 0}.event{flex-direction:column}.event .date{flex-direction:row;align-items:baseline;gap:12px;justify-content:flex-start}}
 </style>
 </head>
 <body>
-<div style="font-family: Inter, sans-serif; color: #1a2233; background: #ffffff; width: 100%">
 
-<header style="background: #0b3d91; color: #ffffff">
-<div style="max-width: 1180px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-<a href="#start" style="display: flex; align-items: center; gap: 12px; color: #ffffff; text-decoration: none">
-<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#ffffff" stroke-width="2.5"></circle><circle cx="20" cy="20" r="11" fill="none" stroke="#ffffff" stroke-width="2.5"></circle><circle cx="20" cy="20" r="4" fill="#ffffff"></circle></svg>
-<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.5px">TV RIEDENBURG · DART</span>
-</a>
-<nav aria-label="Hauptnavigation" style="display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 15px; font-weight: 500">
-<a href="#start" style="color: #ffffff; text-decoration: none; padding: 12px 0">Start</a>
-<a href="#training" style="color: #ffffff; text-decoration: none; padding: 12px 0">Training &amp; Spielort</a>
-<a href="#liga" style="color: #ffffff; text-decoration: none; padding: 12px 0">Liga</a>
-<a href="#mannschaft" style="color: #ffffff; text-decoration: none; padding: 12px 0">Mannschaft</a>
-<a href="#termine" style="color: #ffffff; text-decoration: none; padding: 12px 0">Termine</a>
-<a href="#kontakt" style="color: #ffffff; text-decoration: none; padding: 12px 0">Kontakt</a>
-</nav>
-</div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#start">
+      <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="20" cy="20" r="11" fill="none" stroke="#7db0ff" stroke-width="2.5"/><circle cx="20" cy="20" r="4" fill="#2f7bff"/></svg>
+      <span>TVR <b>Dart</b></span>
+    </a>
+    <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <ul class="menu" id="menu">
+      <li><a href="#training">Training</a></li>
+      <li><a href="#mannschaften">Mannschaften</a></li>
+      <li><a href="#termine">Termine</a></li>
+      <li><a href="#spielort">Spielort</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a class="cta" href="#mitmachen">Mitspielen</a></li>
+    </ul>
+  </div>
 </header>
 
-<section id="start" style="background: #0b3d91; color: #ffffff; border-top: 1px solid #2a5bb0">
-<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px 88px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center">
-<div style="display: flex; flex-direction: column; gap: 20px">
-<p style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #c9dafa">TV Riedenburg 1906 e.V. · Abteilung Dart</p>
-<h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 72px; line-height: 0.95">Dart beim<br>TV Riedenburg</h1>
-<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #e6eefc; max-width: 520px">Willkommen bei der Dartabteilung des TV Riedenburg! Wir spielen im Keller des Gasthauses zur Schmiede in Untereggersberg – mit zwei Mannschaften im Ligabetrieb des Bezirks Niederbayern. Ob Anfänger oder erfahrener Spieler: Beim öffentlichen Training am Donnerstag bist du herzlich willkommen.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
-<a href="#training" style="background: #ffffff; color: #0b3d91; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 6px; font-size: 16px">Komm zum Probetraining</a>
-<a href="#liga" style="border: 2px solid #ffffff; color: #ffffff; text-decoration: none; font-weight: 600; padding: 12px 22px; border-radius: 6px; font-size: 16px">Unsere Mannschaften</a>
+<main>
+<div class="hero" id="start">
+  <div class="board" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">TV Riedenburg 1906 e.V. · Abteilung Dart</p>
+    <h1>TV Riedenburg<br><em>Dart</em></h1>
+    <p class="sub">Dart im Altmühltal. Zwei Mannschaften im Ligabetrieb des Bezirks Niederbayern – und jeden Donnerstag offenes Training für alle.</p>
+    <div class="btns">
+      <a class="btn primary" href="#mitmachen">Jetzt mitspielen</a>
+      <a class="btn ghost" href="#mannschaften">Unsere Mannschaften</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="wrap">
+      <div class="stat"><b>2</b><span>Mannschaften</span></div>
+      <div class="stat"><b>5</b><span>Boards</span></div>
+      <div class="stat"><b>2×</b><span>Training pro Woche</span></div>
+      <div class="stat"><b>1906</b><span>Verein gegründet</span></div>
+    </div>
+  </div>
 </div>
-</div>
-<div style="display: flex; justify-content: center">
-<svg viewBox="0 0 320 320" style="width: 100%; max-width: 340px; height: auto" role="img" aria-label="Stilisierte Dartscheibe">
-<circle cx="160" cy="160" r="150" fill="#072a66"></circle>
-<circle cx="160" cy="160" r="128" fill="none" stroke="#ffffff" stroke-width="14" stroke-dasharray="25.1 25.1"></circle>
-<circle cx="160" cy="160" r="104" fill="#0b3d91"></circle>
-<circle cx="160" cy="160" r="80" fill="none" stroke="#ffffff" stroke-width="10" stroke-dasharray="15.7 15.7"></circle>
-<circle cx="160" cy="160" r="60" fill="#2a5bb0"></circle>
-<circle cx="160" cy="160" r="22" fill="#ffffff"></circle>
-<circle cx="160" cy="160" r="9" fill="#0b3d91"></circle>
-<line x1="230" y1="60" x2="168" y2="152" stroke="#ffffff" stroke-width="5" stroke-linecap="round"></line>
-<path d="M230 60 L252 40 L244 66 Z" fill="#c9dafa"></path>
-</svg>
-</div>
-</div>
+
+<section id="training">
+  <div class="wrap">
+    <p class="eyebrow">Training</p>
+    <h2>Zweimal die Woche<br>ans Board</h2>
+    <p class="lead">Montags trainieren unsere Ligamannschaften. Donnerstags ist öffentliches Training – einfach vorbeikommen, mitwerfen und die Abteilung kennenlernen.</p>
+    <div class="grid g3">
+      <div class="card reveal">
+        <span class="tag">Montag</span>
+        <div class="time">19<small>Uhr</small></div>
+        <h3>Mannschafts&shy;training</h3>
+        <p>Training der 1. und 2. Mannschaft für den Ligabetrieb.</p>
+      </div>
+      <div class="card hot reveal">
+        <span class="tag">Donnerstag · offen für alle</span>
+        <div class="time">19<small>Uhr</small></div>
+        <h3>Öffentliches Training</h3>
+        <p>Für Anfänger und Fortgeschrittene. Ohne Anmeldung, ohne Verpflichtung.</p>
+      </div>
+      <div class="card reveal">
+        <span class="tag">Wo</span>
+        <h3 style="margin-top:14px">Gasthaus zur Schmiede</h3>
+        <p>Im Dartkeller des Gasthauses in Untereggersberg.</p>
+        <p><a href="#spielort">Zum Spielort →</a></p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="training" style="background: #f3f6fb">
-<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 44px; color: #0b3d91">Training &amp; Spielort</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 720px; color: #3a4558">Montags trainieren unsere Ligamannschaften, donnerstags ist öffentliches Training – hier kann jeder vorbeikommen, mitwerfen und die Abteilung kennenlernen.</p>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
-<div style="background: #ffffff; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 3px rgba(11,61,145,0.12)">
-<p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #4a5a78">Montag · 19 Uhr</p>
-<h3 style="margin: 0; font-size: 22px; color: #1a2233">Mannschaftstraining</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3a4558">Training für die 1. und 2. Mannschaft.</p>
-</div>
-<div style="background: #0b3d91; color: #ffffff; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 8px">
-<p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #c9dafa">Donnerstag · 19 Uhr</p>
-<h3 style="margin: 0; font-size: 22px">Öffentliches Training</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #e6eefc">Für alle – einfach vorbeikommen und mitwerfen.</p>
-</div>
-<div style="background: #ffffff; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 1px 3px rgba(11,61,145,0.12)">
-<p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #4a5a78">Spielort</p>
-<h3 style="margin: 0; font-size: 22px; color: #1a2233">Gasthaus zur Schmiede</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3a4558">[Straße und Hausnummer]<br>[PLZ] Untereggersberg</p>
-</div>
-</div>
-<div style="height: 280px; border-radius: 10px; background: #dde6f4; border: 2px dashed #8aa3cc; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; color: #3a4558; font-size: 15px">Google-Maps-Karte: in Google Sites über Einfügen → Karte → „Gasthaus zur Schmiede Untereggersberg“</div>
-</div>
-</section>
-
-<section id="liga">
-<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 44px; color: #0b3d91">Unsere Mannschaften im Ligabetrieb</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 760px; color: #3a4558">Wir sind mit zwei Mannschaften im Bezirk Niederbayern vertreten. Ein Ligaspieltag besteht aus 6 Einzeln, 3 Doppeln und noch einmal 6 Einzeln. Unsere Heimspiele tragen wir im Gasthaus zur Schmiede aus – Zuschauer sind jederzeit willkommen!</p>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
-<div style="border: 2px solid #0b3d91; border-radius: 10px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
-<p style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 64px; line-height: 1; color: #0b3d91">1.</p>
-<h3 style="margin: 0; font-size: 24px; color: #1a2233">1. Mannschaft</h3>
-<p style="margin: 0; font-size: 17px; color: #3a4558">4. Bezirksliga 3</p>
-<a href="#liga" style="margin-top: 8px; align-self: flex-start; background: #0b3d91; color: #ffffff; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 6px; font-size: 15px">Spielplan &amp; Tabelle</a>
-</div>
-<div style="border: 2px solid #0b3d91; border-radius: 10px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
-<p style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 64px; line-height: 1; color: #0b3d91">2.</p>
-<h3 style="margin: 0; font-size: 24px; color: #1a2233">2. Mannschaft</h3>
-<p style="margin: 0; font-size: 17px; color: #3a4558">5. Bezirksliga 1</p>
-<a href="#liga" style="margin-top: 8px; align-self: flex-start; background: #0b3d91; color: #ffffff; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 6px; font-size: 15px">Spielplan &amp; Tabelle</a>
-</div>
-</div>
-</div>
-</section>
-
-<section id="mannschaft" style="background: #f3f6fb">
-<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 32px">
-<h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 44px; color: #0b3d91">Mannschaft</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
-<div style="background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(11,61,145,0.12)">
-<div style="height: 200px; background: #dde6f4; display: flex; align-items: center; justify-content: center; color: #3a4558; font-size: 15px">[Teamfoto 1. Mannschaft]</div>
-<div style="padding: 24px; display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 20px">1. Mannschaft</h3>
-<p style="margin: 0; font-size: 15px; color: #3a4558">[Spielerliste]</p>
-</div>
-</div>
-<div style="background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(11,61,145,0.12)">
-<div style="height: 200px; background: #dde6f4; display: flex; align-items: center; justify-content: center; color: #3a4558; font-size: 15px">[Teamfoto 2. Mannschaft]</div>
-<div style="padding: 24px; display: flex; flex-direction: column; gap: 6px">
-<h3 style="margin: 0; font-size: 20px">2. Mannschaft</h3>
-<p style="margin: 0; font-size: 15px; color: #3a4558">[Spielerliste]</p>
-</div>
-</div>
-</div>
-</div>
+<section id="mannschaften" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Mannschaften</p>
+    <h2>Zwei Teams,<br>ein Verein</h2>
+    <p class="lead">Wir spielen mit zwei Mannschaften im Ligabetrieb des Bezirks Niederbayern. Heimspiele finden im Gasthaus zur Schmiede statt – Zuschauer sind jederzeit willkommen.</p>
+    <div class="grid g2">
+      <div class="card team reveal">
+        <span class="no" aria-hidden="true">1</span>
+        <span class="tag">Bezirk Niederbayern</span>
+        <h3>1. Mannschaft</h3>
+        <span class="league"><i></i>4. Bezirksliga 3</span>
+      </div>
+      <div class="card team reveal">
+        <span class="no" aria-hidden="true">2</span>
+        <span class="tag">Bezirk Niederbayern</span>
+        <h3>2. Mannschaft</h3>
+        <span class="league"><i></i>5. Bezirksliga 1</span>
+      </div>
+    </div>
+    <p class="eyebrow" style="margin-top:56px">So läuft ein Spieltag</p>
+    <div class="format reveal">
+      <div><b>6</b><span>Einzel</span></div>
+      <div><b>3</b><span>Doppel</span></div>
+      <div><b>6</b><span>Einzel</span></div>
+    </div>
+  </div>
 </section>
 
 <section id="termine">
-<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 24px">
-<h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 44px; color: #0b3d91">Termine</h2>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; border-radius: 10px; background: #0b3d91; color: #ffffff; padding: 28px">
-<div style="text-align: center; min-width: 88px">
-<p style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 52px; line-height: 1">19.12.</p>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<h3 style="margin: 0; font-size: 22px">Vereinsmeisterschaft</h3>
-<p style="margin: 0; font-size: 15px; color: #e6eefc">Gasthaus zur Schmiede, Untereggersberg</p>
-</div>
-</div>
-<div style="height: 200px; border-radius: 10px; background: #f3f6fb; border: 2px dashed #8aa3cc; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; color: #3a4558; font-size: 15px">Vereinskalender: in Google Sites über Einfügen → Kalender</div>
-</div>
+  <div class="wrap">
+    <p class="eyebrow">Termine</p>
+    <h2>Was ansteht</h2>
+    <div class="event reveal">
+      <div class="date"><b>19</b><span>Dezember</span></div>
+      <div class="info">
+        <span class="tag">Turnier</span>
+        <h3>Vereins&shy;meisterschaft</h3>
+        <p>Gasthaus zur Schmiede, Untereggersberg</p>
+      </div>
+    </div>
+    <div class="weekly">
+      <div class="row reveal"><b>Mo</b><span><strong>Mannschaftstraining</strong>jede Woche, 19 Uhr</span></div>
+      <div class="row reveal"><b>Do</b><span><strong>Öffentliches Training</strong>jede Woche, 19 Uhr</span></div>
+    </div>
+  </div>
 </section>
 
-<section id="kontakt" style="background: #f3f6fb">
-<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; align-items: center">
-<div style="display: flex; flex-direction: column; gap: 12px">
-<h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 44px; color: #0b3d91">Kontakt &amp; Mitglied werden</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #3a4558">Du hast Fragen oder willst Mitglied werden? Melde dich bei uns!</p>
+<div class="cta-band" id="mitmachen">
+  <div class="wrap">
+    <div>
+      <h2>Lust auf Dart?</h2>
+      <p>Komm donnerstags um 19 Uhr einfach zum öffentlichen Training. Wenn es dir gefällt, wirst du Mitglied im TV Riedenburg.</p>
+    </div>
+    <div class="btns" style="margin-top:0">
+      <a class="btn white" href="https://www.tv-riedenburg.de" rel="noopener">Mitglied werden</a>
+      <a class="btn ghost" href="#kontakt">Kontakt</a>
+    </div>
+  </div>
 </div>
-<div style="background: #ffffff; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 1px 3px rgba(11,61,145,0.12)">
-<p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #4a5a78">Ansprechpartner</p>
-<p style="margin: 0; font-size: 22px; font-weight: 600">Johannes Fanderl</p>
-<p style="margin: 0; font-size: 15px; color: #3a4558">Abteilung Dart · [E-Mail-Adresse]</p>
-<a href="#kontakt" style="margin-top: 8px; align-self: flex-start; background: #0b3d91; color: #ffffff; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 6px; font-size: 15px">Online-Mitgliedsantrag</a>
-</div>
-</div>
-</section>
 
-<footer style="background: #072a66; color: #c9dafa">
-<div style="max-width: 1180px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px">
-<span>TV Riedenburg 1906 e.V. – Abteilung Dart</span>
-<span style="display: flex; flex-wrap: wrap; gap: 20px">
-<a href="https://www.tv-riedenburg.de" style="color: #ffffff">Hauptseite tv-riedenburg.de</a>
-<a href="#start" style="color: #ffffff">Impressum</a>
-<a href="#start" style="color: #ffffff">Datenschutz</a>
-</span>
-</div>
+<section id="spielort" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Heimspielort</p>
+    <h2>Hier fliegen<br>die Pfeile</h2>
+    <div class="venue">
+      <div class="card reveal">
+        <span class="tag">Spiel- und Trainingsstätte</span>
+        <h3 style="margin-top:10px">Gasthaus zur Schmiede</h3>
+        <ul class="list">
+          <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.800 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span><strong>Untereggersberg</strong>93339 Riedenburg</span></li>
+          <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span><strong>5 Boards</strong>im eigenen Dartkeller</span></li>
+        </ul>
+        <div class="btns"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Gasthaus+zur+Schmiede+Untereggersberg+Riedenburg" rel="noopener" target="_blank">Route planen</a></div>
+      </div>
+      <div class="card reveal" id="kontakt">
+        <span class="tag">Kontakt</span>
+        <h3 style="margin-top:10px">Fragen? Melde dich.</h3>
+        <ul class="list">
+          <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.600-6 8-6s8 2 8 6"/></svg><span><strong>Johannes Fanderl</strong>Ansprechpartner Abteilung Dart</span></li>
+          <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Am einfachsten persönlich</strong>donnerstags ab 19 Uhr beim Training</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="brand" href="#start" style="padding:0"><span>TVR <b>Dart</b></span></a>
+        <p style="margin:14px 0 0">Abteilung Dart des<br>TV Riedenburg 1906 e.V.</p>
+      </div>
+      <div>
+        <h4>Abteilung</h4>
+        <ul>
+          <li><a href="#training">Training</a></li>
+          <li><a href="#mannschaften">Mannschaften</a></li>
+          <li><a href="#termine">Termine</a></li>
+          <li><a href="#spielort">Spielort</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Verein</h4>
+        <ul>
+          <li><a href="https://www.tv-riedenburg.de" rel="noopener">tv-riedenburg.de</a></li>
+          <li><a href="https://www.tv-riedenburg.de" rel="noopener">Mitglied werden</a></li>
+          <li><a href="https://www.tv-riedenburg.de" rel="noopener">Impressum</a></li>
+          <li><a href="https://www.tv-riedenburg.de" rel="noopener">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy"><span>© <span id="year">2026</span> TV Riedenburg 1906 e.V. – Abteilung Dart</span><span>Good Darts!</span></div>
+  </div>
 </footer>
 
-</div>
+<script>
+(function(){
+  var b=document.getElementById('burger'),m=document.getElementById('menu');
+  b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Menü schließen':'Menü öffnen');});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A'){m.classList.remove('open');b.setAttribute('aria-expanded','false');}});
+  document.getElementById('year').textContent=new Date().getFullYear();
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
 </body>
 </html>
