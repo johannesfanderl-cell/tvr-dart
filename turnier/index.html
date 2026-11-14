@@ -330,7 +330,7 @@ function mehrView(){const st=statsRows(),t180=st.filter(r=>r.t).sort((a,b)=>b.t-
  <section><h2>Bestleistungen</h2><div class="row2"><div class="card"><b>180er</b>${t180.length?t180.map(r=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--line)"><span>${esc(pn(r.id))}</span><b>${r.t}×</b></div>`).join(''):'<p class="mut">noch keine</p>'}</div>
  <div class="card"><b>Highfinish</b>${hf.length?hf.map(r=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--line)"><span>${esc(pn(r.id))}</span><b>${r.h}</b></div>`).join(''):'<p class="mut">noch keins</p>'}</div></div></section>
  <section><h2>Einstellungen</h2><div class="card">${stp('Scheiben','boards',1,12)}${tgl('Scheiben automatisch belegen','auto')}</div></section>
- <section><h2>Daten</h2><div class="acts"><button class="btn" data-act="export">💾 Backup herunterladen</button><button class="btn" data-act="import">📂 Backup laden</button>
+ <section><h2>Daten</h2><div class="acts"><button class="btn" data-act="export">💾 Backup herunterladen</button><button class="btn" data-act="copy">📋 Backup in Zwischenablage</button><button class="btn" data-act="import">📂 Backup laden</button>
  <button class="btn bad" data-act="new">🗑 Neues Turnier</button></div><input type="file" id="imp" accept=".json,application/json" hidden>
  <p class="mut" style="font-size:12px">Alles wird automatisch auf diesem Gerät gespeichert (auch nach Neuladen oder Bildschirmsperre). Spielmodus: ${esc(S.cfg.game)}.</p></section>`}
 function view(){return ui.tab==='tab'?tabView():ui.tab==='ko'?koView():ui.tab==='mehr'?mehrView():spieleView()}
@@ -397,6 +397,7 @@ const A={
  tv:()=>{ui.tv=true;renderTV();try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}catch(e){}},
  tvoff:()=>{ui.tv=false;renderTV();try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}},
  export:()=>exportJSON(),
+ copy:()=>{try{navigator.clipboard.writeText(JSON.stringify(S)).then(()=>toast('Backup kopiert'),()=>toast('Kopieren nicht erlaubt'))}catch(e){toast('Kopieren nicht erlaubt')}},
  import:()=>$('#imp').click(),
  new:()=>ask('Aktuelles Turnier beenden und neues anlegen? (Spielernamen bleiben erhalten)','Neues Turnier',()=>commit(()=>{const keep=S.names,c=S.cfg;S=fresh(keep);S.cfg=Object.assign(S.cfg,c);ui.tab='spiele'}))
 };
